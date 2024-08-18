@@ -13,7 +13,7 @@ const FormPembaruanVaksinasi = () => {
   useEffect(() => {
     const getPembaruanById = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/sapi/${id}`);
+        const response = await axios.get(`http://fabric-ternak-backend.my.to/sapi/${id}`);
         setKonfirmasiVaksinasi(response.data.konfirmasiVaksinasi);
       } catch (error) {
         if (error.response) {
@@ -80,7 +80,7 @@ const FormPembaruanVaksinasi = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          await axios.patch(`http://localhost:5000/sapi/${id}`, {
+          await axios.patch(`http://fabric-ternak-backend.my.to/sapi/${id}`, {
             arsipSertifikat: ipfsHash,
             konfirmasiVaksinasi: konfirmasiVaksinasi,
             konfirmasiVaksinasiUpdatedAt: new Date(),

@@ -14,7 +14,7 @@ const Userlist = () => {
 
   const getUsers = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/users');
+      const response = await axios.get('http://fabric-ternak-backend.my.to/users');
       setUsers(response.data);
     } catch (error) {
       setError(error.message);
@@ -34,7 +34,7 @@ const Userlist = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         try {
-          axios.delete(`http://localhost:5000/users/${userId}`).then(() => {
+          axios.delete(`http://fabric-ternak-backend.my.to/users/${userId}`).then(() => {
             getUsers();
             Swal.fire({
               title: "Terhapus!",

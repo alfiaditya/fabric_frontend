@@ -7,8 +7,8 @@ const Welcome = () => {
   const { user } = useSelector((state) => state.auth);
   const fetchData = async () => {
     try {
-      const usersData = await axios.get('http://localhost:5000/users');
-      const sapiData = await axios.get('http://localhost:5000/sapi');
+      const usersData = await axios.get('http://fabric-ternak-backend.my.to/users');
+      const sapiData = await axios.get('http://fabric-ternak-backend.my.to/sapi');
 
       const unconfirmedVaksinasiData = sapiData.data.filter(
         (sapi) => sapi.konfirmasiVaksinasi !== 'Sudah Dikonfirmasi'

@@ -17,7 +17,7 @@ const UserEdit = () => {
   useEffect(() => {
     const getUserById = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/users/${id}`);
+        const response = await axios.get(`http://fabric-ternak-backend.my.to/users/${id}`);
         setNama(response.data.nama);
         setEmail(response.data.email);
         setRole(response.data.role);
@@ -53,7 +53,7 @@ const UserEdit = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          await axios.patch(`http://localhost:5000/users/${id}`, {
+          await axios.patch(`http://fabric-ternak-backend.my.to/users/${id}`, {
             nama,
             email,
             password,

@@ -15,7 +15,7 @@ const FormPembaruanData = () => {
   useEffect(() => {
     const getPembaruanById = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/sapi/${id}`);
+        const response = await axios.get(`http://fabric-ternak-backend.my.to/sapi/${id}`);
         setBeratSekarang(response.data.beratSekarang);
         setUmurSekarang(response.data.umurSekarang);
       } catch (error) {
@@ -73,7 +73,7 @@ const FormPembaruanData = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          await axios.patch(`http://localhost:5000/sapi/${id}`, {
+          await axios.patch(`http://fabric-ternak-backend.my.to/sapi/${id}`, {
             beratSekarang: beratSekarang,
             umurSekarang: umurSekarang,
             waktuPembaruan: new Date(),

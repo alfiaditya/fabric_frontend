@@ -37,7 +37,7 @@ const UserCreate = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          await axios.post('http://localhost:5000/register', {
+          await axios.post('http://fabric-ternak-backend.my.to/register', {
             nama: nama,
             email: email,
             password: password,

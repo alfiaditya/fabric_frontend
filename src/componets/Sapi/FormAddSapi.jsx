@@ -115,7 +115,7 @@ const FormAddSapi = () => {
             return;
           }
 
-          const response = await axios.post('http://localhost:5000/sapi', {
+          const response = await axios.post('http://fabric-ternak-backend.my.to/sapi', {
             earTag: eartag,
             jenisSapi: jenissapi,
             tanggalMasuk: tanggalmasuk,
