@@ -10,7 +10,7 @@ export const loginValidation = (user) => {
       confirmButtonText: 'OK'
     }).then(() => {
       // Redirect to homepage or login page
-      window.location.href = 'http://localhost:3000/';
+      window.location.href = 'http://fabric-ternak-backend.my.to/';
     });
     return false;
   }
