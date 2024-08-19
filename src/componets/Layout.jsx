@@ -39,7 +39,7 @@ const Layout = ({ children }) => {
             <div className="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
               <NavLink to="/" className="flex items-center ps-2.5 mb-5">
                 <img src={logo} className="h-6 me-3 sm:h-7" alt="Flowbite Logo" />
-                <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Dinas Peternakan</span>
+                <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Fabric-ternak</span>
               </NavLink>
               <ul className="space-y-2 font-medium">
                 <li>
