@@ -17,7 +17,7 @@ const SimpanKeBlockchain = () => {
   const getSapi = async () => {
     try {
       setIsLoading(true);
-      const response = await axios.get('https://fabric-ternak-backend.my.too/sapi');
+      const response = await axios.get('https://fabric-ternak-backend.my.to/sapi');
       setSapi(response.data);
     } catch (error) {
       setError(error.message);
@@ -28,7 +28,7 @@ const SimpanKeBlockchain = () => {
 
   const fetchBlockchainData = async () => {
     try {
-      const response = await axios.get('https://fabric-ternak-backend.my.too/TernakSapi');
+      const response = await axios.get('https://fabric-ternak-backend.my.to/TernakSapi');
       const earTags = response.data.map(item => item.earTag);
       setBlockchainEarTags(earTags);
     } catch (error) {
@@ -70,7 +70,7 @@ const SimpanKeBlockchain = () => {
           console.log('Data yang dikirim ke backend:', sapiStringified);
   
           setIsLoading(true);
-          const response = await axios.post('https://fabric-ternak-backend.my.too/simpan', sapiStringified);
+          const response = await axios.post('https://fabric-ternak-backend.my.to/simpan', sapiStringified);
           console.log('Response:', response.data);
   
           Swal.fire({

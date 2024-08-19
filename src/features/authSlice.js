@@ -11,7 +11,7 @@ const initialState = {
 
 export const LoginUser = createAsyncThunk("user/LoginUser", async (user, thunkAPI) => {
     try {
-        const response = await axios.post('https://fabric-ternak-backend.my.too/login', {
+        const response = await axios.post('https://fabric-ternak-backend.my.to/login', {
             email: user.email,
             password: user.password
         });
@@ -26,7 +26,7 @@ export const LoginUser = createAsyncThunk("user/LoginUser", async (user, thunkAP
 
 export const getMe = createAsyncThunk("user/getMe", async (_, thunkAPI) => {
     try {
-        const response = await axios.get('https://fabric-ternak-backend.my.too/me');
+        const response = await axios.get('https://fabric-ternak-backend.my.to/me');
         return response.data;
     } catch (error) {
         if (error.response) {
@@ -37,7 +37,7 @@ export const getMe = createAsyncThunk("user/getMe", async (_, thunkAPI) => {
 });
 
 export const LogOut = createAsyncThunk("user/LogOut", async (_, thunkAPI) => {
-    await axios.delete('https://fabric-ternak-backend.my.too/logout');
+    await axios.delete('https://fabric-ternak-backend.my.to/logout');
 });
 
 export const authSlice = createSlice({

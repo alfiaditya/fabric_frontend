@@ -31,7 +31,7 @@ const Register = () => {
     }
 
     try {
-      await axios.post('https://fabric-ternak-backend.my.too/register', {
+      await axios.post('https://fabric-ternak-backend.my.to/register', {
         nama,
         email,
         password,

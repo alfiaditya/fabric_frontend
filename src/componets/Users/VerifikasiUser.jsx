@@ -10,7 +10,7 @@ const VerifikasiUser = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const usersResponse = await axios.get('https://fabric-ternak-backend.my.too/users');
+        const usersResponse = await axios.get('https://fabric-ternak-backend.my.to/users');
         setUsers(usersResponse.data);
       } catch (error) {
         setError(error.message);
@@ -33,7 +33,7 @@ const VerifikasiUser = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          await axios.patch(`https://fabric-ternak-backend.my.too/users/${userId}`, {
+          await axios.patch(`https://fabric-ternak-backend.my.to/users/${userId}`, {
             statusPengguna: 'sudah ter-verifikasi',
           });
 

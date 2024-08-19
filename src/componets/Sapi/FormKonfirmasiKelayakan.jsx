@@ -13,7 +13,7 @@ const FormKonfirmasiKelayakan = () => {
 
   const getSapi = async () => {
     try {
-      const response = await axios.get('https://fabric-ternak-backend.my.too/sapi');
+      const response = await axios.get('https://fabric-ternak-backend.my.to/sapi');
       setSapi(response.data);
     } catch (error) {
       setError(error.message);
@@ -22,7 +22,7 @@ const FormKonfirmasiKelayakan = () => {
 
   const updateKelayakan = async (sapiUuid) => {
     try {
-      await axios.patch(`https://fabric-ternak-backend.my.too/sapi/${sapiUuid}`, {
+      await axios.patch(`https://fabric-ternak-backend.my.to/sapi/${sapiUuid}`, {
         konfirmasiKelayakan: 'Sudah Dikonfirmasi',
         konfirmasiKelayakanUpdatedAt: new Date(),
       });

@@ -15,7 +15,7 @@ const FormPembaruanData = () => {
   useEffect(() => {
     const getPembaruanById = async () => {
       try {
-        const response = await axios.get(`https://fabric-ternak-backend.my.too/sapi/${id}`);
+        const response = await axios.get(`https://fabric-ternak-backend.my.to/sapi/${id}`);
         setBeratSekarang(response.data.beratSekarang);
         setUmurSekarang(response.data.umurSekarang);
       } catch (error) {
@@ -73,7 +73,7 @@ const FormPembaruanData = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          await axios.patch(`https://fabric-ternak-backend.my.too/sapi/${id}`, {
+          await axios.patch(`https://fabric-ternak-backend.my.to/sapi/${id}`, {
             beratSekarang: beratSekarang,
             umurSekarang: umurSekarang,
             waktuPembaruan: new Date(),
