@@ -18,7 +18,7 @@ const SapiList = () => {
 
   const getSapi = async () => {
     try {
-      const response = await axios.get('http://fabric-ternak-backend.my.to/sapi');
+      const response = await axios.get('https://fabric-ternak-backend.my.too/sapi');
       setSapi(response.data);
     } catch (error) {
       setError(error.message);
@@ -38,7 +38,7 @@ const SapiList = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         try {
-          axios.delete(`http://fabric-ternak-backend.my.to/sapi/${sapiId}`).then(() => {
+          axios.delete(`https://fabric-ternak-backend.my.too/sapi/${sapiId}`).then(() => {
             getSapi();
             Swal.fire({
               title: "Terhapus!",

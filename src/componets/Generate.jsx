@@ -24,7 +24,7 @@ const Generate = () => {
 
   const getSapi = async () => {
     try {
-      const response = await axios.get('http://fabric-ternak-backend.my.to/TernakSapi');
+      const response = await axios.get('https://fabric-ternak-backend.my.too/TernakSapi');
       setSapi(response.data);
     } catch (error) {
       setError(error.message);

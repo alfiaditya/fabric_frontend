@@ -13,7 +13,7 @@ const FormKonfirmasiVaksinasi = () => {
 
   const getSapi = async () => {
     try {
-      const response = await axios.get('http://fabric-ternak-backend.my.to/sapi');
+      const response = await axios.get('https://fabric-ternak-backend.my.too/sapi');
       setSapi(response.data);
     } catch (error) {
       setError(error.message);
