@@ -27,12 +27,11 @@ const FormAddSapi = () => {
     const value = e.target.value;
     setBeratawal(value);
 
-    
-    const regex = /^\d+\s*KG$/i; 
-    if (!regex.test(value)) {
-      setBeratAwalError('Berat harus dalam format "XXX KG"');
+    const numericValue = parseFloat(value);
+    if (isNaN(numericValue)) {
+      setBeratAwalError('Berat harus berupa angka yang valid');
     } else {
-      setBeratAwalError(''); 
+      setBeratAwalError('');
     }
   };
 
@@ -40,12 +39,11 @@ const FormAddSapi = () => {
     const value = e.target.value;
     setUmurMasuk(value);
 
-    
-    const regex = /^\d+,\d{1,2} tahun$/; 
-    if (!regex.test(value)) {
-      setUmurMasukError('Umur harus dalam format "X,XX tahun"');
+    const numericValue = parseFloat(value.replace(',', '.'));
+    if (isNaN(numericValue)) {
+      setUmurMasukError('Umur harus berupa angka yang valid');
     } else {
-      setUmurMasukError(''); 
+      setUmurMasukError('');
     }
   };
 
@@ -99,7 +97,7 @@ const FormAddSapi = () => {
     }
 
     Swal.fire({
-      title: "Data tidak bisa diubah, periksa ulang data sebelum disimpan. Apakah Anda yakin ingin menyimpan?",
+      title: "Periksa ulang data sebelum disimpan. Apakah Anda yakin ingin menyimpan?",
       showCancelButton: true,
       confirmButtonText: "Simpan",
       confirmButtonColor: '#3085d6',
@@ -115,12 +113,15 @@ const FormAddSapi = () => {
             return;
           }
 
+          const formattedBeratAwal = `${beratawal} KG`;
+          const formattedUmurMasuk = `${umurMasuk.replace(',', '.')} Tahun`;
+
           const response = await axios.post('https://fabric-ternak-backend.my.to/sapi', {
             earTag: eartag,
             jenisSapi: jenissapi,
             tanggalMasuk: tanggalmasuk,
-            beratAwal: beratawal,
-            umurMasuk: umurMasuk,
+            beratAwal: formattedBeratAwal,
+            umurMasuk: formattedUmurMasuk,
             arsipSapi: ipfsHash,
           });
 
@@ -163,12 +164,18 @@ const FormAddSapi = () => {
         </div>
         <div className="mb-4">
           <label htmlFor="beratawal" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Berat Awal</label>
-          <input type="text" value={beratawal} onChange={handleBeratAwalChange} className="shadow-sm rounded-md w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-gray-700 focus:border-gray-700" placeholder="Berat Awal" required />
+          <div className="relative">
+            <input type="number" value={beratawal} onChange={handleBeratAwalChange} className="shadow-sm rounded-md w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-gray-700 focus:border-gray-700 pr-12" placeholder="Berat Awal (contoh: 300)" required />
+            <span className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-700">KG</span>
+          </div>
           {beratAwalError && <p className="text-red-500">{beratAwalError}</p>}
         </div>
         <div className="mb-4">
           <label htmlFor="umurMasuk" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Umur Masuk</label>
-          <input type="text" value={umurMasuk} onChange={handleUmurMasukChange} className="shadow-sm rounded-md w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-gray-700 focus:border-gray-700" placeholder="Umur Masuk" required />
+          <div className="relative">
+            <input type="number" value={umurMasuk} onChange={handleUmurMasukChange} className="shadow-sm rounded-md w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-gray-700 focus:border-gray-700 pr-16" placeholder="Umur Masuk (contoh: 1,5)" required />
+            <span className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-700">Tahun</span>
+          </div>
           {umurMasukError && <p className="text-red-500">{umurMasukError}</p>}
         </div>
         <div className="mb-4">
@@ -181,9 +188,9 @@ const FormAddSapi = () => {
           )}
         </div>
         <div className="mb-4">
-        <button type="submit" className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-700" disabled={isUploading}>
-          {isUploading ? 'Uploading...' : 'Simpan'}
-        </button>
+          <button type="submit" className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-700" disabled={isUploading}>
+            {isUploading ? 'Uploading...' : 'Simpan'}
+          </button>
         </div>
       </form>
     </div>

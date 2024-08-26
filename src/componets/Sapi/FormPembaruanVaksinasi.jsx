@@ -72,7 +72,7 @@ const FormPembaruanVaksinasi = () => {
     if (!ipfsHash) return;
 
     Swal.fire({
-      title: 'Data tidak bisa diubah, periksa ulang data sebelum disimpan. Apakah Anda yakin ingin menyimpan?',
+      title: 'Periksa ulang data sebelum disimpan. Apakah Anda yakin ingin menyimpan?',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',

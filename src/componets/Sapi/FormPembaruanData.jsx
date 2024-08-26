@@ -31,12 +31,11 @@ const FormPembaruanData = () => {
     const value = e.target.value;
     setBeratSekarang(value);
 
-    // Validation for "Berat Sekarang"
-    const regex = /^\d+\s*KG$/i; // Regex to check format like "200 KG"
-    if (!regex.test(value)) {
-      setBeratSekarangError('Berat harus dalam format "XXX KG"');
+    const numericValue = parseFloat(value);
+    if (isNaN(numericValue)) {
+      setBeratSekarangError('Berat harus berupa angka yang valid');
     } else {
-      setBeratSekarangError(''); // Clear the error message if validation passes
+      setBeratSekarangError('');
     }
   };
 
@@ -44,19 +43,17 @@ const FormPembaruanData = () => {
     const value = e.target.value;
     setUmurSekarang(value);
 
-    // Validation for "Umur Sekarang"
-    const regex = /^\d+,\d{1,2} tahun$/; // Regex to check format like "X,XX tahun"
-    if (!regex.test(value)) {
-      setUmurSekarangError('Umur harus dalam format "X,XX tahun"');
+    const numericValue = parseFloat(value.replace(',', '.'));
+    if (isNaN(numericValue)) {
+      setUmurSekarangError('Umur harus berupa angka yang valid');
     } else {
-      setUmurSekarangError(''); // Clear the error message if validation passes
+      setUmurSekarangError('');
     }
   };
 
   const updatePembaruan = async (e) => {
     e.preventDefault();
 
-    
     if (beratSekarangError || umurSekarangError) {
       setMsg('Please fix the errors before submitting');
       return;
@@ -74,8 +71,8 @@ const FormPembaruanData = () => {
       if (result.isConfirmed) {
         try {
           await axios.patch(`https://fabric-ternak-backend.my.to/sapi/${id}`, {
-            beratSekarang: beratSekarang,
-            umurSekarang: umurSekarang,
+            beratSekarang: `${beratSekarang} KG`,
+            umurSekarang: `${umurSekarang.replace(',', '.')} Tahun`,
             waktuPembaruan: new Date(),
           });
           Swal.fire('Data Tersimpan!', '', 'success');
@@ -92,31 +89,37 @@ const FormPembaruanData = () => {
 
   return (
     <div>
-      <h1 className='font-bold grid justify-items-center text-3xl mt-6'> Pembaruan Data Sapi </h1>
+      <h1 className='font-bold grid justify-items-center text-3xl mt-6'>Pembaruan Data Sapi</h1>
       {msg && <p className="text-red-500">{msg}</p>}
       <form onSubmit={updatePembaruan}>
         <div className="mb-4">
           <label htmlFor="beratSekarang" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Berat Sekarang</label>
-          <input
-            type="text"
-            value={beratSekarang}
-            onChange={handleBeratSekarangChange}
-            className="shadow-sm rounded-md w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-gray-700 focus:border-gray-700"
-            placeholder="Berat Sekarang"
-            required
-          />
+          <div className="relative">
+            <input
+              type="number"
+              value={beratSekarang}
+              onChange={handleBeratSekarangChange}
+              className="shadow-sm rounded-md w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-gray-700 focus:border-gray-700"
+              placeholder="Berat Sekarang (contoh: 350)"
+              required
+            />
+            <span className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-700">KG</span>
+          </div>
           {beratSekarangError && <p className="text-red-500">{beratSekarangError}</p>}
         </div>
         <div className="mb-4">
           <label htmlFor="umurSekarang" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Umur Sekarang</label>
-          <input
-            type="text"
-            value={umurSekarang}
-            onChange={handleUmurSekarangChange}
-            className="shadow-sm rounded-md w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-gray-700 focus:border-gray-700"
-            placeholder="Umur Sekarang"
-            required
-          />
+          <div className="relative">
+            <input
+              type="number"
+              value={umurSekarang}
+              onChange={handleUmurSekarangChange}
+              className="shadow-sm rounded-md w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-gray-700 focus:border-gray-700"
+              placeholder="Umur Sekarang (contoh: 2,5)"
+              required
+            />
+            <span className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-700">Tahun</span>
+          </div>
           {umurSekarangError && <p className="text-red-500">{umurSekarangError}</p>}
         </div>
         <button type="submit" className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-700">Perbarui Data</button>
