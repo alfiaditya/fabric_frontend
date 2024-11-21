@@ -13,7 +13,7 @@ const PembaruanSapiList = () => {
 
   const getSapi = async () => {
     try {
-      const response = await axios.get('https://fabric-ternak-backend.my.to/sapi');
+      const response = await axios.get('http://localhost:5000/sapi');
       setSapi(response.data);
     } catch (error) {
       setError(error.message);

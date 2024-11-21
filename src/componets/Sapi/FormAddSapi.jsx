@@ -116,7 +116,7 @@ const FormAddSapi = () => {
           const formattedBeratAwal = `${beratawal} KG`;
           const formattedUmurMasuk = `${umurMasuk.replace(',', '.')} Tahun`;
 
-          const response = await axios.post('https://fabric-ternak-backend.my.to/sapi', {
+          const response = await axios.post('http://localhost:5000/sapi', {
             earTag: eartag,
             jenisSapi: jenissapi,
             tanggalMasuk: tanggalmasuk,

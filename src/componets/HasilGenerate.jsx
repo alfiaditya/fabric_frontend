@@ -13,7 +13,7 @@ const HasilGenerate = () => {
   
   const fetchSapiData = useCallback(async () => {
     try {
-      const response = await axios.get(`https://fabric-ternak-backend.my.to/TernakSapi/${earTag}`);
+      const response = await axios.get(`http://localhost:5000/TernakSapi/${earTag}`);
       setSapi(response.data);
     } catch (error) {
       setError(error.message);
